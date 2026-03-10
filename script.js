@@ -60,6 +60,8 @@ const cartOverlay = document.getElementById("cart-overlay");
 const cartItemsContainer = document.getElementById("cart-items");
 const cartCountElements = document.querySelectorAll(".cart-count");
 const totalPriceElement = document.getElementById("total-price");
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
 
 // Initialize the application
 function init() {
@@ -116,6 +118,25 @@ function renderProducts(productsToRender) {
 
 // Event Listeners setup
 function setupEventListeners() {
+  // Mobile Menu Toggle
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navLinks.classList.toggle("active");
+    });
+  }
+
+  // Close mobile menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      navLinks &&
+      navLinks.classList.contains("active") &&
+      !navLinks.contains(e.target)
+    ) {
+      navLinks.classList.remove("active");
+    }
+  });
+
   // Cart Sidebar Toggle
   cartIcon.addEventListener("click", toggleCart);
   closeCart.addEventListener("click", toggleCart);
