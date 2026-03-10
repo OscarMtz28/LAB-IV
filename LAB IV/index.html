@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechStore | Tu Tienda Tecnológica</title>
+    <meta
+      name="description"
+      content="La mejor tienda online de tecnología. Encuentra celulares, computadoras, y tablets al mejor precio con envío gratis."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-category="all">
+    <header>
+      <div class="header-container">
+        <a href="index.html" class="logo">Tech<span>Store</span></a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html" class="active">Todos</a></li>
+            <li><a href="celulares.html">Celulares</a></li>
+            <li><a href="computadoras.html">Computadoras</a></li>
+            <li><a href="tablets.html">Tablets</a></li>
+          </ul>
+        </nav>
+        <div class="cart-icon" id="cart-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
+          <span class="cart-count">0</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Lo mejor en Tecnología a tu alcance</h1>
+          <p>
+            Descubre los últimos modelos en smartphones, laptops y tablets con
+            diseño excepcional.
+          </p>
+          <a href="#productos" class="cta-button">Ver Productos</a>
+        </div>
+      </section>
+
+      <section id="productos" class="products-section">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <div class="products-grid" id="products-grid">
+          <!-- Products will be injected by JS -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 TechStore. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h2>Tu Carrito</h2>
+        <button class="close-cart" id="close-cart">&times;</button>
+      </div>
+      <div class="cart-items" id="cart-items">
+        <!-- Cart items will be injected here -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="total-price">$0.00</span>
+        </div>
+        <button class="checkout-button">Proceder al Pago</button>
+      </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
