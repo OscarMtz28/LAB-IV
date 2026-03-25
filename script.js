@@ -156,7 +156,7 @@ if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
   localStorage.setItem("techstore_cart", JSON.stringify(cart));
   checkoutButton.addEventListener("click", () => {
     if (window.AppInventor) {
-      window.AppInventor.setWebViewString("ir_checkout|" + JSON.stringify(cart));
+      window.AppInventor.setWebViewString("ir_checkout" + JSON.stringify(cart));
     } else {
       window.location.href = "https://oscarmtz28.github.io/LAB-IV/checkout.html";
     }
