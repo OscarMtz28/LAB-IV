@@ -1,4 +1,3 @@
-alert("JS funcionando");
 document.addEventListener("DOMContentLoaded", function() {
   // TODO tu código aquí dentro
 
