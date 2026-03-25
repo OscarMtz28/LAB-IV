@@ -152,14 +152,13 @@ if (closeCart) closeCart.addEventListener("click", toggleCart);
 if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
 
   // Checkout Button
-  if (checkoutButton) {
-    checkoutButton.addEventListener("click", () => {
-      if (cart.length === 0) {
-        showToast("Tu carrito está vacío.");
-        return;
-      }
-      
+ if (checkoutButton) {
+  checkoutButton.addEventListener("click", () => {
+    if (window.AppInventor) {
+      window.AppInventor.setWebViewString("ir_checkout");
+    } else {
       window.location.href = "https://oscarmtz28.github.io/LAB-IV/checkout.html";
+    }
     });
   }
 }
