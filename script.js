@@ -291,10 +291,10 @@ function initCheckout() {
   const checkoutTotalPrice = document.getElementById("checkout-total-price");
 
   if (document.body.getAttribute("data-category") === "checkout") {
-    if (cart.length === 0) {
+   /* if (cart.length === 0) {
       window.location.href = "index.html";
       return;
-    }
+    }*/
 
     let checkoutHTML = "";
     let sum = 0;
