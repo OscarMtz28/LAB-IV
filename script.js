@@ -153,6 +153,7 @@ if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
 
   // Checkout Button
  if (checkoutButton) {
+  localStorage.setItem("techstore_cart", JSON.stringify(cart));
   checkoutButton.addEventListener("click", () => {
     if (window.AppInventor) {
       window.AppInventor.setWebViewString("ir_checkout");
