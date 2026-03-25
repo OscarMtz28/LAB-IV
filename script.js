@@ -71,6 +71,7 @@ const cartCountElements = document.querySelectorAll(".cart-count");
 const totalPriceElement = document.getElementById("total-price");
 const menuToggle = document.getElementById("menu-toggle");
 const navLinks = document.getElementById("nav-links");
+const checkoutButton = document.querySelector(".checkout-button");
 
 // Initialize the application
 function init() {
@@ -150,6 +151,31 @@ function setupEventListeners() {
 if (cartIcon) cartIcon.addEventListener("click", toggleCart);
 if (closeCart) closeCart.addEventListener("click", toggleCart);
 if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
+
+  // Checkout Button
+  if (checkoutButton) {
+    checkoutButton.addEventListener("click", () => {
+      if (cart.length === 0) {
+        showToast("Tu carrito está vacío.");
+        return;
+      }
+      
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      
+      // Empty cart
+      cart = [];
+      updateCart();
+      toggleCart();
+      
+      // Show success message
+      showToast("¡Compra realizada con éxito! Total: $" + total.toLocaleString());
+      
+      // Send message to MIT App Inventor
+      if (window.AppInventor) {
+        window.AppInventor.setWebViewString("compra_realizada:" + total);
+      }
+    });
+  }
 }
 
 function toggleCart() {
