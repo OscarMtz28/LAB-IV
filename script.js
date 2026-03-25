@@ -5,7 +5,7 @@ const products = [
     category: "celulares",
     price: 15999,
     image:
-      "/LAB-IV/imgs/iphone.jpg",
+      "imgs/iphone.jpg",
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const products = [
     category: "celulares",
     price: 15999,
     image:
-      "/LAB-IV/imgs/samsung.jpg",
+      "imgs/samsung.jpg",
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const products = [
     category: "computadoras",
     price: 17999,
     image:
-      "/LAB-IV/imgs/macbook.jpg",
+      "imgs/macbook.jpg",
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const products = [
     category: "computadoras",
     price: 13000,
     image:
-      "/LAB-IV/imgs/dell.jpg",
+      "imgs/dell.jpg",
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ const products = [
     category: "tablets",
     price: 9999,
     image:
-      "/LAB-IV/imgs/ipad.jpg",
+      "imgs/ipad.jpg",
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const products = [
     category: "tablets",
     price: 7699,
     image:
-      "/LAB-IV/imgs/huevo.jpg",
+      "imgs/huevo.jpg",
   },
 ];
 
