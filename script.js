@@ -152,16 +152,23 @@ if (closeCart) closeCart.addEventListener("click", toggleCart);
 if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
 
   // Checkout Button
-  if (checkoutButton) {
-    checkoutButton.addEventListener("click", () => {
-      if (cart.length === 0) {
-        showToast("Tu carrito está vacío.");
-        return;
-      }
-      
+  // Checkout Button (adaptado para MIT)
+if (checkoutButton) {
+  checkoutButton.addEventListener("click", () => {
+    if (cart.length === 0) {
+      showToast("Tu carrito está vacío.");
+      return;
+    }
+
+    // Si está dentro de MIT App Inventor
+    if (window.AppInventor) {
+      window.AppInventor.setWebViewString("ir_checkout");
+    } 
+    // Si está en navegador normal
+    else {
       window.location.href = "https://oscarmtz28.github.io/LAB-IV/checkout.html";
-    });
-  }
+    }
+  });
 }
 
 function toggleCart() {
