@@ -281,7 +281,7 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove("show");
     setTimeout(() => toast.remove(), 400); 
-  }, 3000);
+  }, 2000);
 }
 
 // Checkout Form Logic
