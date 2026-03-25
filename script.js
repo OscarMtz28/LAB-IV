@@ -1,3 +1,4 @@
+alert("JS funcionando");
 document.addEventListener("DOMContentLoaded", function() {
   // TODO tu código aquí dentro
 
@@ -8,7 +9,7 @@ const products = [
     category: "celulares",
     price: 15999,
     image:
-      "imgs/iphone.jpg",
+      "https://oscarmtz28.github.io/LAB-IV/imgs/iphone.jpg",
   },
   {
     id: 2,
@@ -16,7 +17,7 @@ const products = [
     category: "celulares",
     price: 15999,
     image:
-      "imgs/samsung.jpg",
+      "https://oscarmtz28.github.io/LAB-IV/imgs/samsung.jpg",
   },
   {
     id: 3,
@@ -24,7 +25,7 @@ const products = [
     category: "computadoras",
     price: 17999,
     image:
-      "imgs/macbook.jpg",
+      "https://oscarmtz28.github.io/LAB-IV/imgs/macbook.jpg",
   },
   {
     id: 4,
@@ -32,7 +33,7 @@ const products = [
     category: "computadoras",
     price: 13000,
     image:
-      "imgs/dell.jpg",
+      "https://oscarmtz28.github.io/LAB-IV/imgs/dell.jpg",
   },
   {
     id: 5,
@@ -40,7 +41,7 @@ const products = [
     category: "tablets",
     price: 9999,
     image:
-      "imgs/ipad.jpg",
+      "https://oscarmtz28.github.io/LAB-IV/imgs/ipad.jpg",
   },
   {
     id: 6,
@@ -48,11 +49,17 @@ const products = [
     category: "tablets",
     price: 7699,
     image:
-      "imgs/huevo.jpg",
+      "https://oscarmtz28.github.io/LAB-IV/imgs/huevo.jpg",
   },
 ];
 
-let cart = JSON.parse(localStorage.getItem("techstore_cart") || "[]");
+let cart = [];
+
+try {
+  cart = JSON.parse(localStorage.getItem("techstore_cart") || "[]");
+} catch (e) {
+  cart = [];
+}
 
 // DOM Elements
 const productsGrid = document.getElementById("products-grid");
@@ -141,9 +148,9 @@ function setupEventListeners() {
   });
 
   // Cart Sidebar Toggle
-  cartIcon.addEventListener("click", toggleCart);
-  closeCart.addEventListener("click", toggleCart);
-  cartOverlay.addEventListener("click", toggleCart);
+if (cartIcon) cartIcon.addEventListener("click", toggleCart);
+if (closeCart) closeCart.addEventListener("click", toggleCart);
+if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
 }
 
 function toggleCart() {
@@ -153,6 +160,7 @@ function toggleCart() {
 
 // Global functions for inline HTML calls
 window.addToCart = function (productId) {
+  
   const product = products.find((p) => p.id === productId);
   const existingItem = cart.find((item) => item.id === productId);
 
@@ -169,6 +177,9 @@ window.addToCart = function (productId) {
   setTimeout(() => (cartIcon.style.transform = "scale(1)"), 200);
 
   updateCart();
+  if (window.AppInventor) {
+  window.AppInventor.setWebViewString("producto_" + productId);
+  }
 };
 
 window.changeQuantity = function (productId, delta) {
@@ -189,7 +200,11 @@ window.removeItem = function (productId) {
 
 // Update DOM based on cart state
 function updateCart() {
+ try {
   localStorage.setItem("techstore_cart", JSON.stringify(cart));
+} catch (e) {
+  // ignorar error en MIT
+}
 
   // Update red badge count
   const count = cart.reduce((total, item) => total + item.quantity, 0);
