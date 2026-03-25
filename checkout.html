@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | TechStore</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-category="checkout">
+    <header>
+      <div class="header-container">
+        <a href="index.html" class="logo">Tech<span>Store</span></a>
+        <nav>
+          <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Todos</a></li>
+            <li><a href="celulares.html">Celulares</a></li>
+            <li><a href="computadoras.html">Computadoras</a></li>
+            <li><a href="tablets.html">Tablets</a></li>
+          </ul>
+        </nav>
+        <div class="header-icons">
+          <div class="menu-toggle" id="menu-toggle">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </div>
+          <!-- Cart Sidebar hidden entirely in checkout or just icon without functionality? Let's leave icon but no checkout btn inside -->
+          <div class="cart-icon" id="cart-icon" style="display:none;"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="checkout-container">
+      <div class="checkout-layout">
+        
+        <!-- Formulario -->
+        <div class="checkout-form-section">
+          <h2 class="checkout-title">Datos de Envío y Pago</h2>
+          <form id="checkout-form" class="checkout-form">
+            <div class="form-group">
+              <label for="fname">Nombre Completo</label>
+              <input type="text" id="fname" required placeholder="Ej. Juan Pérez">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" id="email" required placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="form-group">
+              <label for="address">Dirección de Envío</label>
+              <input type="text" id="address" required placeholder="Calle, Número, Colonia">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">Ciudad</label>
+                <input type="text" id="city" required>
+              </div>
+              <div class="form-group">
+                <label for="zip">Código Postal</label>
+                <input type="text" id="zip" required>
+              </div>
+            </div>
+
+            <h3 class="checkout-subtitle">Método de Pago</h3>
+            <div class="payment-methods">
+              <label class="payment-option">
+                <input type="radio" name="payment" value="tarjeta" checked> Tarjeta de Crédito/Débito
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment" value="efectivo"> Pago en Oxxo / Efectivo
+              </label>
+            </div>
+
+            <button type="submit" class="cta-button checkout-submit">Confirmar Compra</button>
+          </form>
+        </div>
+
+        <!-- Resumen de compra -->
+        <div class="checkout-summary-section">
+          <h2 class="checkout-title">Resumen de tu Orden</h2>
+          <div class="checkout-items" id="checkout-items">
+            <!-- Items del carrito se renderizarán aquí -->
+          </div>
+          <div class="checkout-total">
+            <span>Total a Pagar:</span>
+            <span id="checkout-total-price">$0.00</span>
+          </div>
+        </div>
+        
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 TechStore. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // TODO tu código aquí dentro
 
 const products = [
   {
@@ -60,7 +59,6 @@ try {
   cart = [];
 }
 
-// DOM Elements
 const productsGrid = document.getElementById("products-grid");
 const cartIcon = document.getElementById("cart-icon");
 const cartSidebar = document.getElementById("cart-sidebar");
@@ -73,7 +71,7 @@ const menuToggle = document.getElementById("menu-toggle");
 const navLinks = document.getElementById("nav-links");
 const checkoutButton = document.querySelector(".checkout-button");
 
-// Initialize the application
+
 function init() {
   const category = document.body.getAttribute("data-category") || "all";
   if (category === "all") {
@@ -84,7 +82,6 @@ function init() {
   setupEventListeners();
   updateCart();
 
-  // Smooth scroll for internal links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -99,7 +96,7 @@ function init() {
   });
 }
 
-// Render Products Grid
+
 function renderProducts(productsToRender) {
   productsGrid.innerHTML = "";
 
@@ -112,7 +109,7 @@ function renderProducts(productsToRender) {
   productsToRender.forEach((product, index) => {
     const card = document.createElement("div");
     card.className = "product-card";
-    // Add staggered animation delay
+
     card.style.animationDelay = `${index * 0.1}s`;
 
     card.innerHTML = `
@@ -126,9 +123,9 @@ function renderProducts(productsToRender) {
   });
 }
 
-// Event Listeners setup
+
 function setupEventListeners() {
-  // Mobile Menu Toggle
+
   if (menuToggle && navLinks) {
     menuToggle.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -136,7 +133,7 @@ function setupEventListeners() {
     });
   }
 
-  // Close mobile menu when clicking outside
+
   document.addEventListener("click", (e) => {
     if (
       navLinks &&
@@ -160,20 +157,7 @@ if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
         return;
       }
       
-      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      
-      // Empty cart
-      cart = [];
-      updateCart();
-      toggleCart();
-      
-      // Show success message
-      showToast("¡Compra realizada con éxito! Total: $" + total.toLocaleString());
-      
-      // Send message to MIT App Inventor
-      if (window.AppInventor) {
-        window.AppInventor.setWebViewString("compra_realizada:" + total);
-      }
+      window.location.href = "checkout.html";
     });
   }
 }
@@ -228,14 +212,14 @@ function updateCart() {
  try {
   localStorage.setItem("techstore_cart", JSON.stringify(cart));
 } catch (e) {
-  // ignorar error en MIT
+
 }
 
-  // Update red badge count
+
   const count = cart.reduce((total, item) => total + item.quantity, 0);
   cartCountElements.forEach((el) => (el.textContent = count));
 
-  // Update Cart Sidebar HTML
+
   cartItemsContainer.innerHTML = "";
 
   if (cart.length === 0) {
@@ -269,14 +253,14 @@ function updateCart() {
     });
   }
 
-  // Update total cost
+
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   totalPriceElement.textContent = `$${total.toLocaleString()}`;
 }
 
-// Simple Toast Notification System
+
 function showToast(message) {
-  // Remove existing toast if any
+  
   const existingToast = document.querySelector(".toast");
   if (existingToast) {
     existingToast.remove();
@@ -287,16 +271,85 @@ function showToast(message) {
   toast.textContent = message;
   document.body.appendChild(toast);
 
-  // Trigger slide up animation
   setTimeout(() => toast.classList.add("show"), 10);
 
   // Remove after 3 seconds
   setTimeout(() => {
     toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 400); // Wait for transition
+    setTimeout(() => toast.remove(), 400); 
   }, 3000);
 }
 
-// Boot up
+// Checkout Form Logic
+function initCheckout() {
+  const checkoutForm = document.getElementById("checkout-form");
+  const checkoutItemsContainer = document.getElementById("checkout-items");
+  const checkoutTotalPrice = document.getElementById("checkout-total-price");
+
+  if (document.body.getAttribute("data-category") === "checkout") {
+    if (cart.length === 0) {
+      window.location.href = "index.html";
+      return;
+    }
+
+    let checkoutHTML = "";
+    let sum = 0;
+    
+    cart.forEach(item => {
+      sum += item.price * item.quantity;
+      checkoutHTML += `
+        <div class="checkout-item">
+          <img src="${item.image}" alt="${item.title}" class="checkout-item-img">
+          <div class="checkout-item-details">
+            <div class="checkout-item-title">${item.title}</div>
+            <div class="checkout-item-qty">Cantidad: ${item.quantity}</div>
+          </div>
+          <div class="checkout-item-price">$${(item.price * item.quantity).toLocaleString()}</div>
+        </div>
+      `;
+    });
+    
+    if (checkoutItemsContainer) checkoutItemsContainer.innerHTML = checkoutHTML;
+    if (checkoutTotalPrice) checkoutTotalPrice.textContent = `$${sum.toLocaleString()}`;
+
+    if (checkoutForm) {
+      checkoutForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const submitBtn = checkoutForm.querySelector(".checkout-submit");
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = "Procesando...";
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          showToast("¡Compra realizada con éxito!");
+          
+          if (window.AppInventor) {
+            window.AppInventor.setWebViewString("compra_realizada:" + sum);
+          }
+          
+          cart = [];
+          updateCart();
+          
+          checkoutItemsContainer.innerHTML = `
+            <div style="text-align:center; padding: 3rem 0; color:var(--accent); display:flex; flex-direction:column; align-items:center; gap: 1rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 64px; height: 64px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <h3 style="font-size:1.5rem;">¡Gracias por tu compra!</h3>
+              <p style="color:var(--text-secondary); font-size:1rem;">Tu pedido está siendo procesado.</p>
+              <a href="index.html" class="cta-button" style="margin-top:2rem;">Volver al Inicio</a>
+            </div>`;
+          checkoutForm.style.display = "none";
+          document.querySelector(".checkout-form-section").style.display = "none";
+          document.querySelector(".checkout-summary-section").style.gridColumn = "1 / -1";
+          checkoutTotalPrice.textContent = "$0.00";
+        }, 1500);
+      });
+    }
+  }
+}
+
 init();
+initCheckout();
 });
