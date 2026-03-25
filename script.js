@@ -1,3 +1,6 @@
+document.addEventListener("DOMContentLoaded", function() {
+  // TODO tu código aquí dentro
+
 const products = [
   {
     id: 1,
@@ -256,3 +259,4 @@ function showToast(message) {
 
 // Boot up
 init();
+});
