@@ -5,7 +5,7 @@ const products = [
     category: "celulares",
     price: 15999,
     image:
-      "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&q=80&w=400",
+      "/LAB-IV/imgs/iphone.jpg",
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const products = [
     category: "celulares",
     price: 15999,
     image:
-      "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&q=80&w=400",
+      "/LAB-IV/imgs/samsung.jpg",
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const products = [
     category: "computadoras",
     price: 17999,
     image:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=400",
+      "/LAB-IV/imgs/macbook.jpg",
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const products = [
     category: "computadoras",
     price: 13000,
     image:
-      "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=400",
+      "/LAB-IV/imgs/dell.jpg",
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ const products = [
     category: "tablets",
     price: 9999,
     image:
-      "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=400",
+      "/LAB-IV/imgs/ipad.jpg",
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const products = [
     category: "tablets",
     price: 7699,
     image:
-      "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?auto=format&fit=crop&q=80&w=400",
+      "/LAB-IV/imgs/huevo.jpg",
   },
 ];
 
