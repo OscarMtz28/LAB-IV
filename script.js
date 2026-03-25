@@ -98,6 +98,8 @@ function init() {
 
 
 function renderProducts(productsToRender) {
+  if (!productsGrid) return;
+
   productsGrid.innerHTML = "";
 
   if (productsToRender.length === 0) {
@@ -219,43 +221,45 @@ function updateCart() {
   const count = cart.reduce((total, item) => total + item.quantity, 0);
   cartCountElements.forEach((el) => (el.textContent = count));
 
+  if (cartItemsContainer) {
+    cartItemsContainer.innerHTML = "";
 
-  cartItemsContainer.innerHTML = "";
-
-  if (cart.length === 0) {
-    cartItemsContainer.innerHTML = `
-        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color: var(--text-secondary); opacity: 0.7;">
-            <svg style="width:64px; height:64px; margin-bottom:1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            <p>Tu carrito está vacío</p>
-        </div>`;
-  } else {
-    cart.forEach((item) => {
-      const el = document.createElement("div");
-      el.className = "cart-item";
-      el.innerHTML = `
-                <img src="${item.image}" alt="${item.title}" class="cart-item-img">
-                <div class="cart-item-info">
-                    <div class="cart-item-title">${item.title}</div>
-                    <div class="cart-item-price">$${item.price.toLocaleString()}</div>
-                    <div class="cart-item-actions">
-                        <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
-                        <button class="remove-item" onclick="removeItem(${item.id})">Eliminar</button>
-                    </div>
-                </div>
-            `;
-      cartItemsContainer.appendChild(el);
-    });
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = `
+          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; color: var(--text-secondary); opacity: 0.7;">
+              <svg style="width:64px; height:64px; margin-bottom:1rem;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              <p>Tu carrito está vacío</p>
+          </div>`;
+    } else {
+      cart.forEach((item) => {
+        const el = document.createElement("div");
+        el.className = "cart-item";
+        el.innerHTML = `
+                  <img src="${item.image}" alt="${item.title}" class="cart-item-img">
+                  <div class="cart-item-info">
+                      <div class="cart-item-title">${item.title}</div>
+                      <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+                      <div class="cart-item-actions">
+                          <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+                          <span>${item.quantity}</span>
+                          <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+                          <button class="remove-item" onclick="removeItem(${item.id})">Eliminar</button>
+                      </div>
+                  </div>
+              `;
+        cartItemsContainer.appendChild(el);
+      });
+    }
   }
 
-
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  totalPriceElement.textContent = `$${total.toLocaleString()}`;
+  if (totalPriceElement) {
+    totalPriceElement.textContent = `$${total.toLocaleString()}`;
+  }
 }
 
 
