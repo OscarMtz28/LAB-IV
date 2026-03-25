@@ -159,7 +159,7 @@ if (cartOverlay) cartOverlay.addEventListener("click", toggleCart);
         return;
       }
       
-      window.location.href = "checkout.html";
+      window.location.href = "https://oscarmtz28.github.io/LAB-IV/checkout.html";
     });
   }
 }
@@ -292,7 +292,7 @@ function initCheckout() {
 
   if (document.body.getAttribute("data-category") === "checkout") {
     if (cart.length === 0) {
-      window.location.href = "index.html";
+      window.location.href = "https://oscarmtz28.github.io/LAB-IV/index.html";
       return;
     }
 
